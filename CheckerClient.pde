@@ -27,7 +27,7 @@ void setup()
   background(0);
   smooth();
 
-  data[0] = 1;
+  data[0] = 0;
 
 
   c = new Client(this, "127.0.0.1", 12345); 
@@ -67,6 +67,15 @@ void draw()
   {
 
     block.get(i).Draw();
+
+    if (mousePressed)
+    {
+      if (block.get(i).spaceCollision())
+      {
+        currSelectedBlock = block.get(i)._ID;
+        println(block.get(i)._ID);
+      }
+    }
   }
 
   for (int i = 0; i<checker.size(); i++)
@@ -74,6 +83,11 @@ void draw()
     checker.get(i).Draw();
     checker.get(i).select();
     checker.get(i).Move();
+
+    if (data[0] == 0)
+    {
+      checker.get(i)._isSelected = false;
+    }
 
     if (c.available() > 0) {
       input = c.readString();

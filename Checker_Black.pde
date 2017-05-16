@@ -100,9 +100,10 @@ class Checker_Black
                   //if(it is not colliding with another piece)
                   _pos.x = (int)(mouseX/50) * 50 + 25;
                   _pos.y = (int)(mouseY/50) * 50 + 25;
+                  
                   _isSelected = false;
 
-                  data[0] = 1;
+                  data[0] = 0;
                   //c.write(data[0] + " " + _ID + " " + _pos.x + " " + _pos.y + "\n");
                   c.write(data[0] + "\n");
                 }
