@@ -90,22 +90,26 @@ class Checker_Black
           {
             if (block.get(i).spaceCollision())
             {
+              println("awesome");
               currSelectedBlock = block.get(i)._ID;
               if (dist(mouseX, mouseY, _pos.x, _pos.y) < 80
                 && dist(mouseX, mouseY, _pos.x, _pos.y) > 30) 
               {
-
-                if (((int)(mouseX/50) * 50 + 25 + (int)(mouseY/50) * 50 + 25) % 20 > 0) 
+                println("awesome2.0");
+                if (block.get(currSelectedBlock)._Color == "RED") 
                 {
+                  println("awesome3.0");
                   //if(it is not colliding with another piece)
-                  _pos.x = (int)(mouseX/50) * 50 + 25;
-                  _pos.y = (int)(mouseY/50) * 50 + 25;
-                  
+                  _pos.x = block.get(currSelectedBlock)._posX + 25;
+                  _pos.y = block.get(currSelectedBlock)._posY + 25;
+
+
                   _isSelected = false;
+                  
+                  println(block.get(currSelectedBlock)._ID, _ID);
 
                   data[0] = 0;
-                  //c.write(data[0] + " " + _ID + " " + _pos.x + " " + _pos.y + "\n");
-                  c.write(data[0] + "\n");
+                  c.write(data[0] + " " + block.get(currSelectedBlock)._ID + " " + _ID + "\n");
                 }
               }
             }
