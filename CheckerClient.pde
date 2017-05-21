@@ -13,6 +13,15 @@ boolean Update = false;
 
 import processing.net.*;
 
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+Minim minim;
+AudioPlayer movesound;
+
 Client c;
 String input;
 int data[] = new int[3];
@@ -29,6 +38,8 @@ void setup()
 
   data[0] = 0;
 
+  minim = new Minim(this); //Music 
+  movesound = minim.loadFile("movesound.mp3");
 
   c = new Client(this, "127.0.0.1", 12345); 
 
