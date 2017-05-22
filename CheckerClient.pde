@@ -119,7 +119,7 @@ void draw()
   background(0);
   noStroke();
 
-  //music.play();
+  music.play();
 
   for (int i = 0; i < block.size(); i++)
   {
