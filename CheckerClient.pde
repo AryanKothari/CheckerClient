@@ -12,6 +12,10 @@ int BlockID;
 boolean Update = false;
 int screen = 0;
 
+
+int BlackCheckers;
+int BlueCheckers;
+
 import processing.net.*;
 
 import ddf.minim.*;
@@ -33,11 +37,17 @@ ArrayList<Checker_Black> checker = new ArrayList<Checker_Black>();
 ArrayList<Square> block = new ArrayList<Square>();
 InfoBar InfoBar;
 
+PFont font;
+
 void setup() 
 {
   size (400, 420);
   background(0);
   smooth();
+  noStroke();
+
+  font = createFont("font.ttf", 32);
+
 
   data[0] = 0;
   data[3] = 0;
@@ -84,6 +94,23 @@ void setup()
     }
   }
 
+
+  for (int i = 0; i<checker.size(); i++)
+  {
+    if (checker.get(i)._team == 0)
+    {
+      BlueCheckers += 1;
+    }
+
+    if (checker.get(i)._team == 1)
+    {
+      BlackCheckers += 1;
+    }
+  }
+
+  BlackCheckers -= 4;
+
+
   InfoBar = new InfoBar();
 }
 
@@ -91,7 +118,6 @@ void draw()
 {
   background(0);
   noStroke();
-  InfoBar.Draw();
 
   //music.play();
 
@@ -99,7 +125,6 @@ void draw()
   {
 
     block.get(i).Draw();
-    InfoBar.Draw();
   }
 
 
@@ -107,20 +132,12 @@ void draw()
   {
     fill(0, 150, 0); //play
     rect(30, 140, 350, 80);
-    textSize(20);
-    fill(0, 0, 0);
-    if (data[4] == 0)
-    {
-      text("Awaiting server connection...", 50, 177);
-      textSize(12);
-      fill(255, 255, 0);
-      text("Warning: Do not run client until server has been opened", 46, 205);
-    }
-
-    if (data[4] == 1)
-    {
-      text("Server is playing on one device...", 50, 177);
-    }
+    textFont(font, 25);
+    fill(0, 0, 200);
+    text("Awaiting server connection...", 50, 177);
+    textSize(12);
+    fill(255, 255, 0);
+    text("Warning: Do not run client until server has been opened", 46, 205);
   }
 
   if (data[3] == 1)
@@ -130,14 +147,40 @@ void draw()
       checker.get(i).Draw();
       checker.get(i).select();
       checker.get(i).Move();
-      InfoBar.Draw();
-
 
       if (data[0] == 0)
       {
         checker.get(i)._isSelected = false;
       }
     }
+
+
+    InfoBar.Draw();
+  }
+
+
+  if (data[3] == 2)
+  {
+    fill(0, 150, 0); //play
+    rect(30, 140, 350, 80);
+    textFont(font, 18);
+    fill(0, 0, 200);
+    text("Server is playing on one device mode...", 45, 185);
+  }
+
+  if (data[3] == 4)
+  {
+    for (int i = 0; i<checker.size(); i++)
+    {
+      checker.get(i).Draw();
+    }
+    fill(0, 150, 0); //play
+    rect(30, 140, 350, 80);
+    textFont(font, 25);
+    fill(0, 0, 200);
+    text("Server has been closed...", 50, 177);
+    textSize(12);
+    fill(255, 255, 0);
   }
 
 
