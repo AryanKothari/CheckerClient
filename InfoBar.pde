@@ -17,6 +17,6 @@ class InfoBar
     text("Checkers: " + BlueCheckers, 20, 415);
     fill(0, 0, 0);
     text("Checkers: " + BlackCheckers, 140, 415);
-    text("Client Status:", 250, 415);
+    text("Server Status:", 250, 415);
   }
 }

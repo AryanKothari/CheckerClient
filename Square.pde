@@ -7,7 +7,9 @@ class Square
   int _ID;
   String _Color;
 
-  Square(float posX, float posY, color Color, int size, int ID, String Name)
+  boolean isAvaliable;
+
+  Square(float posX, float posY, color Color, int size, int ID, String Name, boolean _isAvaliable)
   {
     _posX = posX;
     _posY = posY;
@@ -15,6 +17,8 @@ class Square
     _size = size;
     _ID = ID;
     _Color = Name;
+
+    isAvaliable = _isAvaliable;
   }
 
   public void Draw()

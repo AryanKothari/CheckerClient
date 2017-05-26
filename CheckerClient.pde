@@ -2,10 +2,13 @@ int size = 50;
 boolean checkerpiece = false;
 boolean mouseClicked = false;
 int selectedPieces = 0;
-boolean hit;
+boolean isAvaliable;
 
 int currSelected;
+
+int prevSelectedBlock;
 int currSelectedBlock;
+
 int ID;
 int BlockID;
 
@@ -30,7 +33,7 @@ AudioPlayer music;
 
 Client c;
 String input;
-int data[] = new int[6];
+int data[] = new int[7];
 
 
 ArrayList<Checker_Black> checker = new ArrayList<Checker_Black>();
@@ -84,11 +87,20 @@ void setup()
     { 
       if ((x+y) % 20 ==0) 
       {
-        block.add(new Square(x, y, color(255, 0, 0), size, BlockID, "RED"));
+        if (BlockID == 4 || BlockID == 12 || BlockID == 22 || BlockID == 30 ||
+          BlockID == 40 || BlockID == 48 || BlockID == 58 || BlockID == 66)
+        {
+          isAvaliable = true;
+        } else
+        {
+          isAvaliable = false;
+        }
+        block.add(new Square(x, y, color(255, 0, 0), size, BlockID, "RED", isAvaliable));
         BlockID += 1;
       } else
       {
-        block.add(new Square(x, y, color(0, 0, 0), size, BlockID, "BLACK"));
+        isAvaliable = true;
+        block.add(new Square(x, y, color(0, 0, 0), size, BlockID, "BLACK", isAvaliable));
         BlockID += 1;
       }
     }
@@ -181,6 +193,7 @@ void draw()
     text("Server has been closed...", 50, 177);
     textSize(12);
     fill(255, 255, 0);
+    InfoBar.Draw();
   }
 
 
@@ -195,6 +208,8 @@ void draw()
         data = int(split(input, ' ')); // Split values into an array;
         checker.get(data[2])._pos.x = block.get(data[1])._posX + 25;
         checker.get(data[2])._pos.y = block.get(data[1])._posY + 25;
+        block.get(data[3]).isAvaliable = true;
+        block.get(data[1]).isAvaliable = false;
       }
     }
   }
@@ -210,6 +225,15 @@ void mouseClicked()
     {
       currSelected = checker.get(i)._ID;
       checker.get(currSelected)._isSelected = true;
+    }
+  }
+
+
+  for (int i = 0; i < block.size(); i++)
+  {
+    if (block.get(i).spaceCollision())
+    {
+      prevSelectedBlock = block.get(i)._ID;
     }
   }
 }

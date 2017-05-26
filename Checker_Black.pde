@@ -70,7 +70,7 @@ class Checker_Black
       }
     }
 
-    if (_team == 1 && _team == data[0])
+    if ( _team == data[0])
     {
       _stroke = color(0, 255, 0);
     } else
@@ -96,20 +96,23 @@ class Checker_Black
               {
                 if (block.get(currSelectedBlock)._Color == "RED") 
                 {
-                  println("awesome3.0");
-                  //if(it is not colliding with another piece)
-                  _pos.x = block.get(currSelectedBlock)._posX + 25;
-                  _pos.y = block.get(currSelectedBlock)._posY + 25;
+                  if (block.get(currSelectedBlock).isAvaliable)
+                  {
+                    _pos.x = block.get(currSelectedBlock)._posX + 25;
+                    _pos.y = block.get(currSelectedBlock)._posY + 25;
 
 
-                  movesound.play();
-                  movesound.rewind();
+                    movesound.play();
+                    movesound.rewind();
 
 
-                  _isSelected = false;
+                    _isSelected = false;
+                    block.get(currSelectedBlock).isAvaliable = false;
+                    block.get(prevSelectedBlock).isAvaliable = true;
 
-                  data[0] = 0;
-                  c.write(data[0] + " " + block.get(currSelectedBlock)._ID + " " + _ID + "\n");
+                    data[0] = 0;
+                    c.write(data[0] + " " + block.get(currSelectedBlock)._ID + " " + _ID + " " + block.get(prevSelectedBlock) + "\n");
+                  }
                 }
               }
             }
