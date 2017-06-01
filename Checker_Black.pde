@@ -91,28 +91,30 @@ class Checker_Black
             if (block.get(i).spaceCollision())
             {
               currSelectedBlock = block.get(i)._ID;
-              if (dist(mouseX, mouseY, _pos.x, _pos.y) < 80
-                && dist(mouseX, mouseY, _pos.x, _pos.y) > 30) 
+
+              //if (dist(mouseX, mouseY, _pos.x, _pos.y) < 180
+              //  && dist(mouseX, mouseY, _pos.x, _pos.y) > 30) 
+              //{
+              if (block.get(currSelectedBlock)._Color == "RED") 
               {
-                if (block.get(currSelectedBlock)._Color == "RED") 
+                if (block.get(currSelectedBlock).isAvaliable)
                 {
-                  if (block.get(currSelectedBlock).isAvaliable)
-                  {
-                    _pos.x = block.get(currSelectedBlock)._posX + 25;
-                    _pos.y = block.get(currSelectedBlock)._posY + 25;
+                  _pos.x = block.get(currSelectedBlock)._posX + 25;
+                  _pos.y = block.get(currSelectedBlock)._posY + 25;
+
+                  data[0] = 0;
 
 
-                    movesound.play();
-                    movesound.rewind();
+
+                  movesound.play();
+                  movesound.rewind();
 
 
-                    _isSelected = false;
-                    block.get(currSelectedBlock).isAvaliable = false;
-                    block.get(prevSelectedBlock).isAvaliable = true;
+                  _isSelected = false;
+                  block.get(currSelectedBlock).isAvaliable = false;
+                  block.get(prevSelectedBlock).isAvaliable = true;
 
-                    data[0] = 0;
-                    c.write(data[0] + " " + block.get(currSelectedBlock)._ID + " " + _ID + " " + block.get(prevSelectedBlock) + "\n");
-                  }
+                  c.write(data[0] + " " + block.get(currSelectedBlock)._ID + " " + _ID + " " + 0 + " " + block.get(prevSelectedBlock) + "\n");
                 }
               }
             }
